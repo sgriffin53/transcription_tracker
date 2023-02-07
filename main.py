@@ -58,7 +58,24 @@ while True:
         pay_rate_per_sec = amount_earned / time_spent
         pay_rate = pay_rate_per_sec * 60 * 60
         pay_rate = round(pay_rate,2)
+
+        # estimate time remaining
+        audio_secs_per_sec_spent = audio_done_secs / time_spent
+        audio_mins_per_min_spent = (audio_done_secs * 60) / (time_spent * 60)
+        file_length_mins = 87
+        file_remaining_mins = file_length_mins - (current_time / 60)
+        time_remaining_mins = 60
+        if audio_mins_per_min_spent != 0: time_remaining_mins = file_remaining_mins / audio_mins_per_min_spent
+        time_remaining_hrs_show = int(time_remaining_mins / 60)
+        time_remaining_mins_show = int(time_remaining_mins) - time_remaining_hrs_show * 60
+        time_remaining_secs = (time_remaining_mins * 60)
+        time_remaining_secs_show = time_remaining_secs - int(time_remaining_mins) * 60
+        time_remaining_secs_show = int(float(time_remaining_secs_show))
+        time_remaining_mins_show = int(float(time_remaining_mins_show))
+        percentage = current_time * 100 / (file_length_mins * 60)
+        percentage = round(percentage, 1)
         os.system("cls")
         print("Time spent: " + str(time_spent_hours) + " hrs " + str(time_spent_mins) + " mins " + str(time_spent_secs) + " secs")
         print("Audio done: " + str(audio_done_mins) + " mins " + str(audio_done_secs_show) + " secs")
+        print("Time remaining: " + str(time_remaining_hrs_show) + " hrs " + str(time_remaining_mins_show) + " mins " + str(time_remaining_secs_show) + " secs (" + str(percentage) + "%)")
         print("Pay rate: £" + str(pay_rate) + "/hour")
