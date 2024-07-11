@@ -13,7 +13,12 @@ if ':' in file_length:
     secs = file_length.split(':')[1]
     total = float(mins) + (float(secs) / 60)
     file_length = str(round(total,2))
-    print(file_length)
+    print("Set file length to " + str(file_length) + " minutes")
 file1.write(file_length + "\n")
 file1.close()
+file_rate = input("Enter pay rate (£/min):")
+myfile = open('file_rate.txt','w')
+myfile.write(str(file_rate) + '\n')
+myfile.close()
+print("Set pay rate to £" + str(file_rate))
 print("Reset done")
